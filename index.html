@@ -41,6 +41,14 @@
             items:[
               {
                 type: 'link',
+                x: 70,
+                y: 179,
+                width: 220,
+                height: 20,
+                url: "mailto:leilao@simplesmentevinho.pt"
+              },
+              {
+                type: 'link',
                 x: 68,
                 y: 845,
                 width: 210,
@@ -57,7 +65,20 @@
               },
             ]
           },
-          {src: "book3/large-006.webp", thumb: "book3/thumb-006.webp"},
+          {
+            src: "book3/large-006.webp",
+            thumb: "book3/thumb-006.webp",
+            items: [
+              {
+                type: 'link',
+                x: 203,
+                y: 830,
+                width: 167,
+                height: 20,
+                url: "mailto:info@humanwinety.com"
+              },
+            ]
+          },
           {src: "book3/large-007.webp", thumb: "book3/thumb-007.webp"},
           {src: "book3/large-008.webp", thumb: "book3/thumb-008.webp"},
           {src: "book3/large-009.webp", thumb: "book3/thumb-009.webp"},
@@ -191,11 +212,12 @@
         btnSound:{enabled: false},
         btnDownloadPdf: {
           icon2: "file_download",
-          url: "/pdf/catalogo.pdf"
+          url: "/pdf/cat2024_2.pdf"
         },
         shareUrl: 'https://leilaosolidario.pt',
         shareTitle: "Leilão Solidário",
         shareImage: null,
+        deeplinkingPrefix: 'catalogo_'
       });
     })
   </script>
