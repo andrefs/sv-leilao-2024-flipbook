@@ -1,0 +1,46 @@
+#!/bin/bash
+
+PDF_PATH=$1
+FOLDER_PATH=$2
+
+if [ -z "$PDF_PATH" ]; then
+  echo "PDF_PATH is not set"
+  exit 1
+fi
+
+if [ -z "$FOLDER_PATH" ]; then
+  echo "FOLDER_PATH is not set"
+  exit 1
+fi
+
+if [ ! -f "$PDF_PATH" ]; then
+  echo "PDF_PATH is not a file"
+  exit 1
+fi
+
+if [ ! -d "$FOLDER_PATH" ]; then
+  echo "Creating folder $FOLDER_PATH"
+  mkdir -p $FOLDER_PATH
+fi
+
+echo "Converting $PDF_PATH to images"
+pdftoppm -progress -r 300 -png $PDF_PATH $FOLDER_PATH/large
+
+echo "Creating thumbnails"
+pdftoppm -progress -scale-to-y 130 -scale-to-x -1 -png $PDF_PATH $FOLDER_PATH/thumb
+
+echo "Converting images to webp"
+for file in $FOLDER_PATH/large*.png; do
+  cwebp "$file" -o "${file%.png}.webp";
+done
+
+echo "Converting thumbnails to webp"
+for file in $FOLDER_PATH/thumb*.png; do
+  cwebp "$file" -o "${file%.png}.webp";
+done
+
+echo "Cleaning up"
+rm $FOLDER_PATH/*.png
+
+echo "Done"
+
